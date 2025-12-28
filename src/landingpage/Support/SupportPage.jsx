@@ -1,9 +1,11 @@
 
-
+import  CreateTicket from './CreateTicket'
+import HeroSupport from './Hero'
 export default function SupportPage() {
   return (
     <div>
-      <h1>Support Page</h1>
+      < HeroSupport/>
+      < CreateTicket/>
     </div>
   );
 }
