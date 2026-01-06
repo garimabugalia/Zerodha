@@ -1,52 +1,84 @@
 
 
-export default function Navbar() {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-      <div className="container-fluid">
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-        <a className="navbar-brand" href="#">
-          <img src="Media/logo.svg" alt="logo" style={{ width: "120px" }} />
-        </a>
+function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
+    const navLinks = [
+        { name: "Signup", href: '/signup' },
+        { name: "About", href: '/about' },
+        { name: "Product", href: '/product' },
+        { name: "Pricing", href: '/pricing' },
+        { name: "Support", href: '/support' },
+    ];
+
+    return (
+        <nav className="bg-white shadow-md sticky  top-0 z-50">
+            <div className="w-[80%]  mx-auto px-4 sm:px-6 lg:px-24">
+                <div className="flex justify-between items-center h-16">
+                    {/* Logo Section */}
+                    <div className="shrink-0">
+                        <Link to="/" className="text-2xl font-bold text-blue-600">
+                            <img
+                                src="/Media/logo.svg"
+                                alt="Logo"
+                                className="h-5"
+                            />
+                        </Link>
+                    </div>
+
+                    {/* Desktop Links */}
+{/* Desktop Links */}
+<div className="hidden md:flex space-x-8 items-center ">
+    {navLinks.map((link) => (
+        <  Link
+            key={link.name}
+            to={link.href}
+            className="text-gray-500 hover:text-blue-600 transition-colors text-[16px] !no-underline"
         >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+            {link.name}
+        </Link>
+    ))}
+    {/* Dashboard Link - Port 5174 */}
+    <a 
+        href="https://zerodha-liq9.vercel.app/" 
+        className="text-gray-500 hover:text-blue-600 transition-colors text-[16px] !no-underline"
+    >
+        Dashboard
+    </a>
+</div>
+                    {/* Mobile Toggle */}
+                    <button
+                        className="md:hidden"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
+            </div>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
-            <li className="nav-item">
-              <a className="nav-link active" href="#">Home</a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
-            </li>
-
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-              >
-                Dropdown
-              </a>
-              <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#">Action</a></li>
-                <li><a className="dropdown-item" href="#">Another action</a></li>
-              </ul>
-            </li>
-
-          </ul>
-        </div>
-
-      </div>
-    </nav>
-  );
+            {/* Mobile Menu */}
+            {isOpen && (
+                <div className="md:hidden bg-white border-t">
+                    <div className="px-4 py-4 space-y-3">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.href}
+                                onClick={() => setIsOpen(false)}
+                                className="block text-gray-800 hover:text-blue-600 py-2"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </nav>
+    );
 }
+
+export default Navbar;
