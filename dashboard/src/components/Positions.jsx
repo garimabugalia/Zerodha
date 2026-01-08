@@ -9,6 +9,7 @@ const Positions = () => {
 
         axios.get("http://localhost:3000/addPositions").then((res) => {
             // console.log(res.data);
+            withCredentials: true,
             setAllPositions(res.data);
         });
     }, []);

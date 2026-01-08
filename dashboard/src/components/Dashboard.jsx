@@ -1,8 +1,12 @@
 
-import React from "react";
+
+
 import { Route, Routes } from "react-router-dom";
 
-import Apps from "./Apps";
+
+import { useEffect } from "react";
+
+// import Apps from "./Apps";
 import Funds from "./Funds";
 import Holdings from "./Holdings";
 
@@ -11,8 +15,19 @@ import Positions from "./Positions";
 import Summary from "./Summary";
 import WatchList from "./WatchList";
 import { GeneralContextProvider } from "./GeneralContext";
-
+import useAuth from "../hooks/useAuth";
 const Dashboard = () => {
+
+
+  const { loading, isAuthenticated } = useAuth();
+
+  if (loading) return <p>Loading...</p>;
+
+  if (!isAuthenticated) {
+    window.location.href = "http://localhost:5173/signup";
+    return null;
+  }
+
   return (
     <div className="dashboard-container">
       <GeneralContextProvider>
@@ -25,7 +40,7 @@ const Dashboard = () => {
           <Route path="/holdings" element={<Holdings />} />
           <Route path="/positions" element={<Positions />} />
           <Route path="/funds" element={<Funds />} />
-          <Route path="/apps" element={<Apps />} />
+          {/* <Route path="/apps" element={<Apps />} /> */}
         </Routes>
       </div>
     </div>

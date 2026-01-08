@@ -4,17 +4,28 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const bodyParser = require("body-parser");
+
+const jwt = require("jsonwebtoken");
 const cors = require("cors");
+
 const PORT =process.env.PORT || 3000;
 const url = process.env.MONGO_URL;
 const app = express();
-
+const cookieParser = require("cookie-parser");
 const { HoldingsModel } = require("./models/HoldingsModel");
 const { PositionsModel } = require("./models/PositionsModel");
 const { OrdersModel } = require("./models/OrdersModel");
+const authMiddleware = require("./middleware/authMiddleware");
 
-app.use(cors());
+// Make sure CORS allows credentials (already in your index.js)
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:5174"], // your frontend URLs
+  credentials: true, // important to allow cookies
+}));
+
+app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 
 mongoose
@@ -25,6 +36,75 @@ mongoose
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
+
+
+
+let otpStore = {}; // TEMP STORAGE
+
+
+
+// STEP 2: send OTP
+app.post("/api/send-otp", (req, res) => {
+  const { mobileNumber } = req.body; // this works if express.json() middleware is used
+
+  if (!mobileNumber) {
+    return res.status(400).json({ success: false, message: "Mobile number is required" });
+  }
+
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+  otpStore[mobileNumber] = otp;
+
+  console.log("OTP for", mobileNumber, "is", otp);
+
+  // send success response
+  res.json({ success: true, message: "OTP sent successfully" });
+});
+
+// STEP 3: verify OTP
+app.post("/api/verify-otp", (req, res) => {
+  const { mobileNumber, otp } = req.body;
+
+  if (otpStore[mobileNumber] !== otp) {
+    return res.status(401).json({ success: false, message: "Invalid OTP" });
+  }
+
+  delete otpStore[mobileNumber];
+
+  // CREATE JWT
+  const token = jwt.sign(
+    { mobileNumber },
+    process.env.JWT_SECRET,
+    { expiresIn: "1d" }
+  );
+
+  // SET COOKIE
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: false, // true in production (HTTPS)
+    path: "/",
+  });
+
+  res.json({ success: true });
+});
+
+
+app.get("/api/me", authMiddleware, (req, res) => {
+  res.json({ user: req.user });
+});
+
+
+
+
+
+app.post("/api/logout", (req, res) => {
+  res.clearCookie("token");
+  res.json({ success: true });
+});
+
+
+
 
 
  //ADDING TEMPERARY HOLDINGS DATA
@@ -202,12 +282,12 @@ mongoose
 
 
 
-app.get("/allHoldings", async (req, res) => {
+app.get("/allHoldings",authMiddleware, async (req, res) => {
   let allHoldings = await HoldingsModel.find({});
   res.json(allHoldings);
 });
 
-app.get("/allPositions", async (req, res) => {
+app.get("/allPositions",authMiddleware, async (req, res) => {
   let allPositions = await PositionsModel.find({});
   res.json(allPositions);
 });
@@ -225,6 +305,10 @@ app.post("/newOrder", async (req, res) => {
 
   res.send("Order saved!");
 });
+
+
+
+
 
 
 app.listen(PORT, () => {

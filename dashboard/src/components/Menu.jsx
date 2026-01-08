@@ -26,42 +26,42 @@ const Menu = () => {
                     <li>
                         <Link to="/"
                             onClick={() => handleClickmenu(0)}
-                            className={selectedmenu === 0 ? activeMenuClass : menuClass} 
+                            className="{selectedmenu === 0 ? activeMenuClass : menuClass} !no-underline"
                         >Dashboard
                         </Link>
                     </li>
                     <li>
                         <Link to="/orders"
                             onClick={() => handleClickmenu(1)}
-                             className={selectedmenu === 1 ? activeMenuClass : menuClass} 
+                             className="{selectedmenu === 1 ? activeMenuClass : menuClass} !no-underline"
                         > Orders</Link>
                         
                     </li>
                     <li>
                         <Link to="/holdings"
                             onClick={() => handleClickmenu(2)}
-                            className={selectedmenu === 2 ? activeMenuClass : menuClass}  
+                            className="{selectedmenu === 2 ? activeMenuClass : menuClass} !no-underline"
                         > Holdings</Link>
 
                     </li>
                     <li>
                         <Link to="/positions"
                             onClick={() => handleClickmenu(3)}
-                            className={selectedmenu === 3 ? activeMenuClass : menuClass} 
+                            className="{selectedmenu === 3 ? activeMenuClass : menuClass} !no-underline"
                         >Positions</Link>
                     </li>
                     <li>
                         <Link to="/funds"
                             onClick={() => handleClickmenu(4)}
-                            className={selectedmenu === 4? activeMenuClass : menuClass}  
+                            className="{selectedmenu === 4? activeMenuClass : menuClass}  !no-underline"
                         >Funds</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="/apps"
                             onClick={() => handleClickmenu(5)}
                             className={selectedmenu === 5 ? activeMenuClass : menuClass}  
                         >Apps</Link>
-                    </li>
+                    </li> */}
                 </ul>
                 <hr />
                 <div className="profile" onClick={hadleProfileClick}>

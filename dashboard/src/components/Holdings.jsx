@@ -10,6 +10,7 @@ const Holdings = () => {
 
   useEffect(() => {
     axios.get("http://localhost:3000/allHoldings").then((res) => {
+      withCredentials: true,
       // console.log(res.data);
       setAllHoldings(res.data);
     });
