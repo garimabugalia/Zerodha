@@ -19,7 +19,7 @@ const authMiddleware = require("./middleware/authMiddleware");
 
 // Make sure CORS allows credentials (already in your index.js)
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"], // your frontend URLs
+  origin: ["https://zerodha-frontend-flax.vercel.app", "https://zerodha-dashboardv.vercel.app"], // your frontend URLs
   credentials: true, // important to allow cookies
 }));
 
@@ -80,10 +80,10 @@ app.post("/api/verify-otp", (req, res) => {
 
   // SET COOKIE
   res.cookie("token", token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: false, // true in production (HTTPS)
-    path: "/",
+   httpOnly: true,
+  sameSite: "none",   // REQUIRED
+  secure: true,       // REQUIRED (HTTPS)
+  path: "/",
   });
 
   res.json({ success: true });
@@ -312,5 +312,5 @@ app.post("/newOrder", async (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on ${PORT}`);
 });
