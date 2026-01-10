@@ -61,7 +61,7 @@ function Signup() {
 
     if (data.success) {
 
-       window.location.href = "http://localhost:5174"    // ✅ correct redirect
+       window.location.href = "https://zerodha-dashboardv.vercel.app/"    // ✅ correct redirect
     } else {
       alert("Invalid OTP ❌");
     }

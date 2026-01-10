@@ -70,7 +70,7 @@ function Navbar() {
             <button
               onClick={() => {
                 if (isAuthenticated) {
-                  window.location.href = "http://localhost:5174"  ;
+                  window.location.href = "https://zerodha-dashboardv.vercel.app/"  ;
                 } else {
                   navigate("/signup");
                 }
