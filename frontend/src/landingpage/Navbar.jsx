@@ -6,11 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
+const API_BASE = "https://zerodha-2xhr.onrender.com";
+
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { loading, isAuthenticated } = useAuth();
+const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
 
@@ -27,7 +30,7 @@ function Navbar() {
   
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/me", {
+    fetch(`${API_BASE}/api/me`, {
       credentials: "include",
     })
       .then(res => setIsLoggedIn(res.ok))
@@ -37,7 +40,7 @@ function Navbar() {
  if (loading) return null;
  
  const logout = async () => {
-  await fetch("http://localhost:3000/api/logout", {
+  await fetch(`${API_BASE}/api/logout`, {
     method: "POST",
     credentials: "include",
   });
