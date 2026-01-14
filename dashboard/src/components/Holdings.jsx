@@ -2,19 +2,34 @@
 import React, { useState, useEffect } from "react";
 import axios, { all } from "axios";
 import { VerticalGraph } from "./VerticalGraph";
-
+import API_BASE from "../config/api";
 // import { holdings } from "../data/data";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/allHoldings").then((res) => {
-      withCredentials: true,
-      // console.log(res.data);
-      setAllHoldings(res.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:3000/allHoldings").then((res) => {
+  //     withCredentials: true,
+  //     // console.log(res.data);
+  //     setAllHoldings(res.data);
+  //   });
+  // }, []);
+
+useEffect(() => {
+  axios.get(`${API_BASE}/allHoldings`, {
+    withCredentials: true, // ✅ cookies go here
+  })
+  .then((res) => {
+    setAllHoldings(res.data);
+  })
+  .catch((err) => {
+    console.error("Error fetching holdings:", err);
+  });
+}, []);
+
+
+
 
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   const labels = allHoldings.map((subArray) => subArray["name"]);

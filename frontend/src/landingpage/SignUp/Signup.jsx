@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import API_BASE from "../config/api";
 
 function Signup() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState("MOBILE"); // MOBILE | OTP
-
+ 
   // STEP 1: Send OTP
   const handleContinue = async (e) => {
   e.preventDefault();
@@ -19,7 +19,7 @@ function Signup() {
   }
 
   try {
-    const res = await fetch("https://zerodha-2xhr.onrender.com/api/send-otp", {
+    const res = await fetch(`${API_BASE}/api/send-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mobileNumber }),
@@ -49,7 +49,7 @@ function Signup() {
       return;
     }
 
-   const res = await fetch("https://zerodha-2xhr.onrender.com/api/verify-otp", {
+   const res = await fetch(`${API_BASE}/api/verify-otp`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ mobileNumber, otp }),
