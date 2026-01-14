@@ -24,7 +24,7 @@ const authMiddleware = require("./middleware/authMiddleware");
 // }));
 
 
-const cors = require("cors");
+
 
 app.use(
   cors({
