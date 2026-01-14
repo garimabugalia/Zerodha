@@ -24,28 +24,19 @@ const authMiddleware = require("./middleware/authMiddleware");
 // }));
 
 
+const cors = require("cors");
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      const allowedOrigins = [
-        "http://localhost:4173",
-        "http://localhost:5173",
-        "https://zerodha-frontend-flax.vercel.app",
-        "https://zerodha-dashboardv.vercel.app",
-      ];
-
-      // allow requests with no origin (Postman, server-to-server)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [
+      "http://localhost:4173",
+      "http://localhost:5173",
+      "https://zerodha-frontend-flax.vercel.app",
+      "https://zerodha-dashboardv.vercel.app",
+    ],
     credentials: true,
   })
 );
-
 // ✅ THIS LINE IS REQUIRED (preflight support)
 app.options("*", cors());
 
