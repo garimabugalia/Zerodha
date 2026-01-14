@@ -2,13 +2,13 @@
 
 
 import { useEffect, useState } from "react";
-
+import API_BASE from '../config/api';
 const useAuth = () => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/me", {
+    fetch(`${API_BASE}/api/me`, {
       credentials: "include",
     })
       .then(res => {
