@@ -37,8 +37,7 @@ app.use(
     credentials: true,
   })
 );
-// ✅ THIS LINE IS REQUIRED (preflight support)
-app.options("*", cors());
+
 
 app.use(express.json());
 app.use(bodyParser.json());
