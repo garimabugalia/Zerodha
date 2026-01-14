@@ -29,13 +29,13 @@ function Navbar() {
 
   
 
-  useEffect(() => {
-    fetch(`${API_BASE}/api/me`, {
-      credentials: "include",
-    })
-      .then(res => setIsLoggedIn(res.ok))
-      .catch(() => setIsLoggedIn(false));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${API_BASE}/api/me`, {
+  //     credentials: "include",
+  //   })
+  //     .then(res => setIsLoggedIn(res.ok))
+  //     .catch(() => setIsLoggedIn(false));
+  // }, []);
 
  if (loading) return null;
  
@@ -85,7 +85,14 @@ function Navbar() {
             </button>
 
 
-            
+            {isAuthenticated && (
+              <button
+                onClick={logout}
+                className="text-red-500 hover:text-red-600 text-[16px]"
+              >
+                Logout
+              </button>
+            )}
 
 
 
