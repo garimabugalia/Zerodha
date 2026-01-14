@@ -18,10 +18,36 @@ const { OrdersModel } = require("./models/OrdersModel");
 const authMiddleware = require("./middleware/authMiddleware");
 
 // Make sure CORS allows credentials (already in your index.js)
-app.use(cors({
-  origin: ["https://zerodha-frontend-flax.vercel.app", "https://zerodha-dashboardv.vercel.app"], // your frontend URLs
-  credentials: true, // important to allow cookies
-}));
+// app.use(cors({
+//   origin: ["https://zerodha-frontend-flax.vercel.app", "https://zerodha-dashboardv.vercel.app"], // your frontend URLs
+//   credentials: true, // important to allow cookies
+// }));
+
+
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://localhost:4173",
+        "http://localhost:5173",
+        "https://zerodha-frontend-flax.vercel.app",
+        "https://zerodha-dashboardv.vercel.app",
+      ];
+
+      // allow requests with no origin (Postman, server-to-server)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+// ✅ THIS LINE IS REQUIRED (preflight support)
+app.options("*", cors());
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -99,7 +125,13 @@ app.get("/api/me", authMiddleware, (req, res) => {
 
 
 app.post("/api/logout", (req, res) => {
-  res.clearCookie("token");
+  // res.clearCookie("token");
+  res.clearCookie("token", {
+  httpOnly: true,
+  sameSite: "none",
+  secure: true,
+});
+
   res.json({ success: true });
 });
 
