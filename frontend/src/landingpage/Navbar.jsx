@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
-import API_BASE from "../config/api";
+import API_BASE from './config/api';
 
 
 function Navbar() {
