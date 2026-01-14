@@ -2,17 +2,34 @@
 
 import React, { useState, useEffect } from "react";
 import axios, { all } from "axios";
+import API_BASE from "../config/api";
 //import { positions } from '../data/data.jsx'
 const Positions = () => {
     const [allPositions, setAllPositions] = useState([]);
-    useEffect(() => {
+    // useEffect(() => {
 
-        axios.get("http://localhost:3000/addPositions").then((res) => {
-            // console.log(res.data);
-            withCredentials: true,
-            setAllPositions(res.data);
-        });
+    //     axios.get("http://localhost:3000/addPositions").then((res) => {
+    //         // console.log(res.data);
+    //         withCredentials: true,
+    //         setAllPositions(res.data);
+    //     });
+    // }, []);
+
+
+    useEffect(() => {
+      axios.get(`${API_BASE}/allPositions`, {
+        withCredentials: true, // ✅ cookies go here
+      })
+      .then((res) => {
+        setAllPositions(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching holdings:", err);
+      });
     }, []);
+    
+
+
 
     return (
         <>
