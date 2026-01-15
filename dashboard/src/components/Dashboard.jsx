@@ -24,7 +24,7 @@ const Dashboard = () => {
   if (loading) return <p>Loading...</p>;
 
   if (!isAuthenticated) {
-    window.location.href = "https://zerodha-frontend-94cz3oxex-garimas-projects-a0cf3a65.vercel.app/signup";
+    window.location.href = "https://frontend-nine-lake-80.vercel.app/signup";
     return null;
   }
 

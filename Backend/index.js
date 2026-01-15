@@ -30,7 +30,7 @@ app.use(
   cors({
     origin: [
      
-      "https://zerodha-frontend-flax.vercel.app",
+      "https://frontend-nine-lake-80.vercel.app",
       "https://zerodha-dashboardv.vercel.app",
     ],
     credentials: true,
