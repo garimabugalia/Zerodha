@@ -97,12 +97,12 @@ console.log("API_BASE =", API_BASE);
             <img
               src="/Media/account_open.svg"
               alt="Signup"
-              className="w-full max-w-[500px]"
+              className="w-full max-w-[500px]  pointer-events-none"
             />
           </div>
 
           {/* Form */}
-          <div className="w-full md:w-1/2 max-w-[400px]">
+          <div className="w-full md:w-1/2 max-w-[400px] relative z-10">
             <h2 className="text-[32px] font-semibold mb-2">Signup now</h2>
 
             {/* STEP 1: MOBILE */}
