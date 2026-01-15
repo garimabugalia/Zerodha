@@ -29,13 +29,6 @@ function Navbar() {
 
   
 
-  // useEffect(() => {
-  //   fetch(`${API_BASE}/api/me`, {
-  //     credentials: "include",
-  //   })
-  //     .then(res => setIsLoggedIn(res.ok))
-  //     .catch(() => setIsLoggedIn(false));
-  // }, []);
 
  if (loading) return null;
  
