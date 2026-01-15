@@ -29,8 +29,7 @@ const authMiddleware = require("./middleware/authMiddleware");
 app.use(
   cors({
     origin: [
-      "http://localhost:4173",
-      "http://localhost:5173",
+     
       "https://zerodha-frontend-flax.vercel.app",
       "https://zerodha-dashboardv.vercel.app",
     ],

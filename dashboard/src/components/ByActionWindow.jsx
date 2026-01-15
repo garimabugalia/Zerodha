@@ -7,13 +7,13 @@ import axios from "axios";
 import GeneralContext from './GeneralContext'
 
 import './ByActionWindow.css';
-
+import API_BASE from "../config/api"; 
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
   const handleBuyClick = () => {
-    axios.post("http://localhost:3000/newOrder", {
+    axios.post(`${API_BASE}/newOrder`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,

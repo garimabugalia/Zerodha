@@ -8,14 +8,6 @@ import API_BASE from '../config/api';
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/allHoldings").then((res) => {
-  //     withCredentials: true,
-  //     // console.log(res.data);
-  //     setAllHoldings(res.data);
-  //   });
-  // }, []);
-
 useEffect(() => {
   axios.get(`${API_BASE}/allHoldings`, {
     withCredentials: true, // ✅ cookies go here
