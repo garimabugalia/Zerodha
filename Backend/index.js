@@ -31,7 +31,7 @@ app.use(
     origin: [
      
       "https://frontend-nine-lake-80.vercel.app",
-      "https://zerodha-dashboardv.vercel.app",
+      "https://my-dashboard-lt5xu6vja-garimas-projects-a0cf3a65.vercel.app/",
     ],
     credentials: true,
   })
