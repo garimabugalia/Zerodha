@@ -24,7 +24,7 @@ const Dashboard = () => {
   if (loading) return <p>Loading...</p>;
 
   if (!isAuthenticated) {
-    window.location.href = "http://localhost:5173/signup";
+    window.location.href = "https://zerodha-frontend-94cz3oxex-garimas-projects-a0cf3a65.vercel.app/signup";
     return null;
   }
 
