@@ -16,6 +16,7 @@ import Summary from "./Summary";
 import WatchList from "./WatchList";
 import { GeneralContextProvider } from "./GeneralContext";
 import useAuth from "../hooks/useAuth";
+import SIGNUP_URL from "../config/api";
 const Dashboard = () => {
 
 
@@ -24,7 +25,7 @@ const Dashboard = () => {
   if (loading) return <p>Loading...</p>;
 
   if (!isAuthenticated) {
-    window.location.href = "https://frontend-fk9nr8vu4-garimas-projects-a0cf3a65.vercel.app/signup";
+    window.location.href = `${SIGNUP_URL}`;
     return null;
   }
 

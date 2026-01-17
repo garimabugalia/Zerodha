@@ -66,7 +66,7 @@ function Navbar() {
             <button
               onClick={() => {
                 if (isAuthenticated) {
-                  window.location.href = "https://my-dashboard-lt5xu6vja-garimas-projects-a0cf3a65.vercel.app/";  
+                  window.location.href = `${Dashboard_URL}`;  
                 } else {
                   navigate("/signup");
                 }

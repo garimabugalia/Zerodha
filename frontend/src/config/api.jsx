@@ -1,4 +1,5 @@
 
 
 const API_BASE = "https://zerodha-2xhr.onrender.com";
-export default API_BASE;
+const Dashboard_URL = "https://my-dashboard-iota-six.vercel.app/";
+export { API_BASE, Dashboard_URL };
