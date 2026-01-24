@@ -1,7 +1,7 @@
 
 
 import { useEffect, useState } from "react";
-import API_BASE from '../config/api';
+import { API_BASE } from "../config/api";
 const useAuth = () => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);

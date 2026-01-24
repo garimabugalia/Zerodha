@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 import useAuth from "../hooks/useAuth";
-import API_BASE from '../config/api';
+import { API_BASE, DASHBOARD_URL } from "../config/api";
+
 
 
 function Navbar() {
@@ -66,7 +68,7 @@ function Navbar() {
             <button
               onClick={() => {
                 if (isAuthenticated) {
-                  window.location.href = `${Dashboard_URL}`;  
+                  window.location.href = `${DASHBOARD_URL}`;  
                 } else {
                   navigate("/signup");
                 }
