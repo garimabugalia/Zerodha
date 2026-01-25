@@ -7,7 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import useAuth from "../hooks/useAuth";
-import { API_BASE, DASHBOARD_URL } from "../config/api";
+import { API_BASE, DASHBOARD_URL ,SIGNUP_URL} from "../config/api";
 
 
 
@@ -70,7 +70,7 @@ function Navbar() {
                 if (isAuthenticated) {
                   window.location.href = `${DASHBOARD_URL}`;  
                 } else {
-                  navigate("/signup");
+                  navigate(`${SIGNUP_URL}`);
                 }
               }}
 
