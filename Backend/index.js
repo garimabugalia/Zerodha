@@ -26,27 +26,44 @@ const authMiddleware = require("./middleware/authMiddleware");
 
 
 
-app.use(
-  cors({
-    origin: [
-     
-      "https://frontend-9xmn81qyh-garimas-projects-a0cf3a65.vercel.app",
-      "https://my-dashboard-iota-six.vercel.app",
-    ],
-    credentials: true,
+// app.use(
+//   cors({
+//     origin: [
+//       "https://frontend-nine-lake-80.vercel.app",
+//       "https://frontend-9xmn81qyh-garimas-projects-a0cf3a65.vercel.app",
+//       "https://my-dashboard-iota-six.vercel.app",
+//     ],
+//     credentials: true,
     
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization']
-  })
-);
-app.options(/.*/, cors());
+//       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//       allowedHeaders: ['Content-Type', 'Authorization']
+//   })
+// );
+// app.options(/.*/, cors());
 
+const corsOptions = {
+  origin: [
+    "https://frontend-nine-lake-80.vercel.app",
+    "https://frontend-9xmn81qyh-garimas-projects-a0cf3a65.vercel.app",
+    "https://my-dashboard-iota-six.vercel.app",
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cookieParser());
 
+app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 mongoose
   .connect(process.env.MONGO_URL)
