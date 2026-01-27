@@ -63,7 +63,7 @@ console.log("API_BASE =", API_BASE);
 
     if (data.success) {
 
-       window.location.href = "https://zerodha-dashboardv.vercel.app/"    // ✅ correct redirect
+       window.location.href = "https://my-dashboard-iota-six.vercel.app"    // ✅ correct redirect
     } else {
       alert("Invalid OTP ❌");
     }
