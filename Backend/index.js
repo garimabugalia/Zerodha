@@ -44,7 +44,8 @@ const authMiddleware = require("./middleware/authMiddleware");
 const corsOptions = {
   origin: [
     "https://frontend-nine-lake-80.vercel.app",
-    "https://frontend-9xmn81qyh-garimas-projects-a0cf3a65.vercel.app",
+    "https://frontend-i3u1bxsiz-garimas-projects-a0cf3a65.vercel.app",
+    
     "https://my-dashboard-iota-six.vercel.app",
   ],
   credentials: true,
