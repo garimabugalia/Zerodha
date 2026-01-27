@@ -34,6 +34,9 @@ app.use(
       "https://my-dashboard-iota-six.vercel.app/",
     ],
     credentials: true,
+    
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
 
