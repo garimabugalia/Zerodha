@@ -30,8 +30,8 @@ app.use(
   cors({
     origin: [
      
-      "https://frontend-nine-lake-80.vercel.app",
-      "https://my-dashboard-iota-six.vercel.app/",
+      "https://frontend-9xmn81qyh-garimas-projects-a0cf3a65.vercel.app",
+      "https://my-dashboard-iota-six.vercel.app",
     ],
     credentials: true,
     
@@ -39,6 +39,7 @@ app.use(
       allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
+app.options("*", cors());
 
 
 app.use(express.json());
